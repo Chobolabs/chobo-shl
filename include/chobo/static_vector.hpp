@@ -186,16 +186,16 @@ public:
 
     static_vector() = default;
 
-    explicit static_vector(size_t count)
+    explicit static_vector(size_type count)
     {
         resize(count);
     }
 
-    static_vector(size_t count, const T& value)
+    static_vector(size_type count, const T& value)
     {
         _CHOBO_STATIC_VECTOR_OUT_OF_RANGE_IF(count > Capacity, );
 
-        for (size_t i = 0; i < count; ++i)
+        for (size_type i = 0; i < count; ++i)
         {
             push_back(value);
         }
@@ -219,8 +219,8 @@ public:
         }
     }
 
-    template <size_t CapacityB>
-    static_vector(const static_vector<T, CapacityB>& v)
+    template <size_t CapacityB, typename SizeTypeB>
+    static_vector(const static_vector<T, CapacityB, SizeTypeB>& v)
     {
         _CHOBO_STATIC_VECTOR_OUT_OF_RANGE_IF(v.size() > Capacity, );
 
@@ -392,17 +392,17 @@ public:
         return m_size == 0;
     }
 
-    size_t size() const noexcept
+    size_type size() const noexcept
     {
         return m_size;
     }
 
-    size_t max_size() const noexcept
+    size_type max_size() const noexcept
     {
         return Capacity;
     }
 
-    size_t capacity() const noexcept
+    size_type capacity() const noexcept
     {
         return Capacity;
     }
@@ -538,14 +538,14 @@ public:
             shorter = &v;
         }
 
-        for (size_t i = 0; i < shorter->size(); ++i)
+        for (size_type i = 0; i < shorter->size(); ++i)
         {
             std::swap(shorter->at(i), longer->at(i));
         }
 
         auto short_size = shorter->m_size;
 
-        for (size_t i = shorter->size(); i < longer->size(); ++i)
+        for (size_type i = shorter->size(); i < longer->size(); ++i)
         {
             shorter->emplace_back(std::move(longer->at(i)));
             longer->at(i).~T();
@@ -559,8 +559,8 @@ private:
     size_type m_size = 0;
 };
 
-template <typename T, size_t CapacityA, size_t CapacityB>
-bool operator==(const static_vector<T, CapacityA>& a, const static_vector<T, CapacityB>& b)
+template <typename T, size_t CapacityA, size_t CapacityB, typename SizeTypeA, typename SizeTypeB>
+bool operator==(const static_vector<T, CapacityA, SizeTypeA>& a, const static_vector<T, CapacityB, SizeTypeB>& b)
 {
     if (a.size() != b.size())
     {
@@ -576,8 +576,8 @@ bool operator==(const static_vector<T, CapacityA>& a, const static_vector<T, Cap
     return true;
 }
 
-template <typename T, size_t CapacityA, size_t CapacityB>
-bool operator!=(const static_vector<T, CapacityA>& a, const static_vector<T, CapacityB>& b)
+template <typename T, size_t CapacityA, size_t CapacityB, typename SizeTypeA, typename SizeTypeB>
+bool operator!=(const static_vector<T, CapacityA, SizeTypeA>& a, const static_vector<T, CapacityB, SizeTypeB>& b)
 {
     if (a.size() != b.size())
     {
