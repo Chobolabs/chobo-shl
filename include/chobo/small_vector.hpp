@@ -158,11 +158,11 @@
 #   define _CHOBO_SMALL_VECTOR_OUT_OF_RANGE_IF(cond) if (cond) throw std::out_of_range("chobo::small_vector out of range")
 #elif CHOBO_SMALL_VECTOR_ERROR_HANDLING == CHOBO_SMALL_VECTOR_ERROR_HANDLING_ASSERT
 #   include <cassert>
-#   define _CHOBO_SMALL_VECTOR_OUT_OF_RANGE_IF(cond, rescue_return) assert(!(cond) && "chobo::small_vector out of range")
+#   define _CHOBO_SMALL_VECTOR_OUT_OF_RANGE_IF(cond) assert(!(cond) && "chobo::small_vector out of range")
 #elif CHOBO_SMALL_VECTOR_ERROR_HANDLING == CHOBO_SMALL_VECTOR_ERROR_HANDLING_ASSERT_AND_THROW
 #   include <stdexcept>
 #   include <cassert>
-#   define _CHOBO_SMALL_VECTOR_OUT_OF_RANGE_IF(cond, rescue_return) \
+#   define _CHOBO_SMALL_VECTOR_OUT_OF_RANGE_IF(cond) \
     do { if (cond) { assert(false && "chobo::small_vector out of range"); throw std::out_of_range("chobo::small_vector out of range"); } } while(false)
 #else
 #error "Unknown CHOBO_SMALL_VECTOR_ERRROR_HANDLING"
