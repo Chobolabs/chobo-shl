@@ -1,6 +1,8 @@
 Chobo Single-Header Libraries
 =============================
 
+> **NO LONGER SUPPORTED!** The successor is at [iboB/itlib](https://github.com/iboB/itlib). New libraries and updates to the existing ones will be added there.
+
 A collection of small single-header C++11 libraries by [Chobolabs](http://www.chobolabs.com/).
 
 [![Language](https://img.shields.io/badge/language-C++-blue.svg)](https://isocpp.org/) [![Standard](https://img.shields.io/badge/C%2B%2B-11-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
