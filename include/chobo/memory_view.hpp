@@ -594,4 +594,22 @@ TEST_CASE("[const_memory_view] test")
     }
 }
 
+TEST_CASE("[const_memory_view from memory_view] test")
+{
+    using namespace chobo;
+    // Construct const_memory_view from memory_view
+    std::vector<int> ivec = { 6, 7, 8, 9, 10 };
+    memory_view<int> mv( ivec.data(), ivec.size() );
+    
+    const_memory_view<int> cmv = mv; // Compile error
+}
+
+TEST_CASE("[const_memory_view with std::string] test")
+{
+    using namespace chobo;
+    
+    std::string s = "12345"; // std::string::data() returns const char*
+    auto cmv = make_memory_view(s); // Compile error
+}
+
 #endif
